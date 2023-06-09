@@ -62,8 +62,8 @@ let timerTextgrösse;
 let myFont;
 
 let ratio = 1.77;
-let ratioPaddinglinksrechts = 8;
-let ratioPaddingobenunten = 12;
+let ratioPaddinglinksrechts;
+let ratioPaddingobenunten;
 
 let jahr = 2019;
 
@@ -76,7 +76,18 @@ function setup() {
   valueArray = [];
   createCanvas(windowWidth, windowHeight); //3840 x 2160
   background(0);
-  paddinglinksrechts = windowWidth / ratioPaddinglinksrechts;
+
+  if (windowWidth < windowHeight) {
+    ratioPaddinglinksrechts = 12;
+    ratioPaddingobenunten = 8;
+  }
+
+  if (windowWidth > windowHeight) {
+    ratioPaddinglinksrechts = 8;
+    ratioPaddingobenunten = 12;
+  }
+
+  paddinglinksrechts = windowHeight / ratioPaddinglinksrechts;
   paddingobenunten = windowWidth / ratioPaddingobenunten;
   jahrpadding = paddingobenunten / 2;
   längeGrafik = windowWidth - 2 * paddinglinksrechts;
@@ -85,35 +96,17 @@ function setup() {
   myFont = loadFont("Roboto-Regular.ttf");
   textFont(myFont);
 
-  /*   zürichbaselabstand = paddinglinksrechts / 2;
-    abstandobenunten = paddingobenunten / 3;
-    abstandTag = (paddingobenunten / 4) * 3;
-    abstandSkala = paddinglinksrechts / 2;
-    textgrösseTitelYahr = ceil(windowWidth / 100);
-    textgrösseZBKWH = ceil(windowWidth / 100);
-    textgrösseTageMonate = ceil(windowWidth / 100);
-    lineLength = ceil(windowWidth / 250);
-    if (textgrösseTitelYahr < 22) {
-      textgrösseTitelYahr = 22;
-    }
-    if (textgrösseZBKWH < 16) {
-      textgrösseZBKWH = 16;
-    }
-    if (textgrösseTageMonate < 16) {
-      textgrösseTageMonate = 16;
-    } */
-
   zürichbaselabstand = paddinglinksrechts / 2;
   abstandobenunten = paddingobenunten / 3;
   abstandTag = (paddingobenunten / 4) * 3;
-  abstandSkala = paddinglinksrechts / 2;
-  titelJahrgrösse = floor(windowWidth / 80);
-  stadtTextgrösse = floor(windowWidth / 100);
-  timerTextgrösse = floor(windowWidth / 120);
-  skalaTextgrösse = floor(windowWidth / 120);
-  lineLength = ceil(windowWidth / 250);
+  abstandSkala = paddinglinksrechts / 1;
+  titelJahrgrösse = floor(windowHeight / 70);
+  stadtTextgrösse = floor(windowHeight / 70);
+  timerTextgrösse = floor(windowHeight / 90);
+  skalaTextgrösse = floor(windowHeight / 90);
+  lineLength = ceil(windowHeight / 250);
   skalaFarbe = 100;
-  liniendicke = floor(windowWidth / 1500);
+  liniendicke = floor(windowHeight / 1500);
 
   if (liniendicke <= 0) {
     liniendicke = 0.5;
@@ -121,18 +114,20 @@ function setup() {
 
   //console.log(timerTextgrösse);
 
-  if (titelJahrgrösse < 15) {
-    titelJahrgrösse = 15;
+  if (titelJahrgrösse < 20) {
+    titelJahrgrösse = 20;
   }
-  if (stadtTextgrösse < 11) {
-    stadtTextgrösse = 11;
+  if (stadtTextgrösse < 16) {
+    stadtTextgrösse = 16;
   }
-  if (timerTextgrösse < 11) {
-    timerTextgrösse = 11;
+  if (timerTextgrösse < 16) {
+    timerTextgrösse = 16;
   }
-  if (skalaTextgrösse < 11) {
-    skalaTextgrösse = 11;
+  if (skalaTextgrösse < 14) {
+    skalaTextgrösse = 14;
   }
+
+  console.log(titelJahrgrösse);
 
   numRows = data.getRowCount();
   let zurichStromValues = int(data.getColumn("StromverbrauchZurich"));
@@ -312,8 +307,8 @@ function lineAnim() {
 function drawStaticGraphic() {}
 
 function draw() {
-  lineStatic();
-  //lineAnim();
+  //lineStatic();
+  lineAnim();
   drawSkala();
 }
 
@@ -452,7 +447,7 @@ function drawSkala() {
 
   textSize(titelJahrgrösse);
   textAlign(CENTER, CENTER);
-  text("Stromverbrauch pro Stunde", paddinglinksrechts, abstandobenunten);
+  text("Stromverbrauch pro Stunde", windowWidth / 2, abstandobenunten);
   /*   textAlign(RIGHT, CENTER);
     textSize(timerTextgrösse);
     text(
@@ -460,7 +455,7 @@ function drawSkala() {
       width - paddinglinksrechts,
       height - jahrpadding
     ); */
-  textAlign(CENTER, CENTER);
+  textAlign(RIGHT, CENTER);
   textSize(timerTextgrösse);
   text(
     "MWh = Megawattstunden",
