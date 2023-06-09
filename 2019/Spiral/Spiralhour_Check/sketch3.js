@@ -101,7 +101,7 @@ function setup() {
 
   angleMode(DEGREES);
 
-  linedashKoeff = ceil(windowWidth / 300);
+  linedashKoeff = ceil(windowWidth / 500);
 
   zürichbaselabstand = paddinglinksrechts / 2;
   abstandobenunten = paddingobenunten / 3;
@@ -113,12 +113,12 @@ function setup() {
   skalaTextgrösse = floor(windowHeight / 90);
   lineLength = ceil(windowHeight / 250);
   skalaFarbe = 100;
-  liniendicke = floor(windowHeight / 1500);
+  liniendicke = 0.2;
 
   //console.log(timerTextgrösse);
 
   if (liniendicke <= 0) {
-    liniendicke = 0.5;
+    liniendicke = 0.2;
   }
 
   //console.log(timerTextgrösse);
@@ -216,7 +216,7 @@ function SpiralStatic() {
 
   strokeCap(SQUARE);
   for (let i = 0; i < valueArray.length - 1; i++) {
-    stroke(weiss, 20);
+    stroke(weiss, 7);
     strokeWeight(liniendicke);
     //Zürich
     push();
@@ -230,8 +230,8 @@ function SpiralStatic() {
     pop();
     //Basel
     push();
-    stroke(weiss, 10);
-    strokeWeight(liniendicke);
+    stroke(weiss, 5);
+    strokeWeight(0.2);
     translate((windowWidth / 4) * 3, windowHeight / 2);
     line(
       valueArray[i][2],
@@ -320,7 +320,7 @@ function draw() {
 }
 
 function drawSpiralSkalaZürich() {
-  background(0, 60);
+  // background(0, 60);
 
   fill(0);
   rect(0, 0, windowWidth / 4, jahrpadding);
@@ -475,15 +475,26 @@ function drawSpiralSkalaZürich() {
       line(pos, 0, 0, pos);
       line(0, pos, -pos, 0);
       line(-pos, 0, -skalaTextgrösse, -pos + skalaTextgrösse);
-
-      /*     noFill();
-          strokeWeight(1);
-          stroke(100);
-          rotate(64);
-          setLineDash([linedashKoeff, linedashKoeff]);
-          //ellipse(0, 0, skalaMapping * 2);
-          arc(0, 0, skalaMapping * 2, skalaMapping * 2, 33, 379, OPEN); */
     }
+
+    if (i > 4 && i < 12 && i % 2 == 0) {
+      textSize(skalaTextgrösse);
+      noStroke();
+      fill("black");
+
+      text(skala, 0, -pos);
+
+      setLineDash([linedashKoeff, linedashKoeff]);
+
+      noFill();
+      strokeWeight(strokeDickeArc);
+      stroke("black");
+      line(skalaTextgrösse, -pos + skalaTextgrösse, pos, 0);
+      line(pos, 0, 0, pos);
+      line(0, pos, -pos, 0);
+      line(-pos, 0, -skalaTextgrösse, -pos + skalaTextgrösse);
+    }
+
     pop();
   }
   /*   console.log("titel", titelJahrgrösse);
@@ -653,14 +664,23 @@ function drawSpiralSkalaBasel() {
       line(pos, 0, 0, pos);
       line(0, pos, -pos, 0);
       line(-pos, 0, -skalaTextgrösse, -pos + skalaTextgrösse);
+    }
+    if (i > 2 && i < 5 && i % 2 == 0) {
+      textSize(skalaTextgrösse);
+      noStroke();
+      fill("black");
 
-      /*     noFill();
-          strokeWeight(1);
-          stroke(100);
-          rotate(64);
-          setLineDash([linedashKoeff, linedashKoeff]);
-          //ellipse(0, 0, skalaMapping * 2);
-          arc(0, 0, skalaMapping * 2, skalaMapping * 2, 33, 379, OPEN); */
+      text(skala, 0, -pos);
+
+      setLineDash([linedashKoeff, linedashKoeff]);
+
+      noFill();
+      strokeWeight(strokeDickeArc);
+      stroke("black");
+      line(skalaTextgrösse, -pos + skalaTextgrösse, pos, 0);
+      line(pos, 0, 0, pos);
+      line(0, pos, -pos, 0);
+      line(-pos, 0, -skalaTextgrösse, -pos + skalaTextgrösse);
     }
     pop();
   }

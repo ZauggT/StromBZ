@@ -86,30 +86,15 @@ function setup() {
     ratioPaddinglinksrechts = 8;
     ratioPaddingobenunten = 12;
   }
-  paddinglinksrechts = windowWidth / ratioPaddinglinksrechts;
+  paddinglinksrechts = windowHeight / ratioPaddinglinksrechts;
   paddingobenunten = windowWidth / ratioPaddingobenunten;
   jahrpadding = paddingobenunten / 2;
+  längeGrafik = windowWidth - 2 * paddinglinksrechts;
+  einAbschnitt = längeGrafik / 14;
 
   myFont = loadFont("Roboto-Regular.ttf");
   textFont(myFont);
 
-  /*   zürichbaselabstand = paddinglinksrechts / 2;
-  abstandobenunten = paddingobenunten / 3;
-  abstandTag = (paddingobenunten / 4) * 3;
-  abstandSkala = paddinglinksrechts / 2;
-  textgrösseTitelYahr = ceil(windowWidth / 100);
-  textgrösseZBKWH = ceil(windowWidth / 100);
-  textgrösseTageMonate = ceil(windowWidth / 100);
-  lineLength = ceil(windowWidth / 250);
-  if (textgrösseTitelYahr < 22) {
-    textgrösseTitelYahr = 22;
-  }
-  if (textgrösseZBKWH < 16) {
-    textgrösseZBKWH = 16;
-  }
-  if (textgrösseTageMonate < 16) {
-    textgrösseTageMonate = 16;
-  } */
   zürichbaselabstand = paddinglinksrechts / 2;
   abstandobenunten = paddingobenunten / 3;
   abstandTag = (paddingobenunten / 4) * 3;
@@ -325,7 +310,7 @@ function drawSkala() {
   let schriftFarbe = 255;
   let linienDicke = 0.5;
   let zahlenSkala = [20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130];
-  let wochentage = ["Morgen", "Mittag", "Nachmittag", "Abend"];
+  let wochentage = ["00:00", "6:00", "12:00", "18:00", "00:00"];
   let positions = [];
   let längeGrafik = width - 2 * paddinglinksrechts;
   let einAbschnitt = längeGrafik / 3;
@@ -338,26 +323,26 @@ function drawSkala() {
     let positionWochentagX = map(
       i,
       0,
-      3,
+      4,
       paddinglinksrechts,
       width - paddinglinksrechts
     );
 
-    if (i == 1) {
-      textAlign(CENTER, CENTER);
+    // if (i == 1) {
+    textAlign(CENTER, CENTER);
 
-      textSize(skalaTextgrösse);
-      noStroke();
-      /*     stroke(schriftFarbe);
+    textSize(skalaTextgrösse);
+    noStroke();
+    /*     stroke(schriftFarbe);
     strokeWeight(schriftDicke); */
-      fill(skalaFarbe);
-      text(tag, positionWochentagX + mitteAbschnitt, abstandTag);
-      /*     ellipse(
+    fill(skalaFarbe);
+    text(tag, positionWochentagX, abstandTag);
+    /*     ellipse(
       positionWochentagX + mitteAbschnitt,
       height - paddingobenunten + 1,
       2
     ); */
-    }
+    // }
   }
 
   for (let i = 0; i <= 11; i++) {

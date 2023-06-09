@@ -108,7 +108,7 @@ function setup() {
   zürichbaselabstand = paddinglinksrechts / 2;
   abstandobenunten = paddingobenunten / 3;
   abstandTag = (paddingobenunten / 4) * 3;
-  abstandSkala = paddinglinksrechts / 1;
+  abstandSkala = paddinglinksrechts / 2;
   titelJahrgrösse = floor(windowHeight / 70);
   stadtTextgrösse = floor(windowHeight / 70);
   timerTextgrösse = floor(windowHeight / 90);
@@ -216,7 +216,7 @@ function SpiralStatic() {
 
   strokeCap(SQUARE);
   for (let i = 0; i < valueArray.length - 1; i++) {
-    stroke(weiss, 20);
+    stroke(weiss, 50);
     strokeWeight(liniendicke);
     //Zürich
     push();
@@ -230,7 +230,7 @@ function SpiralStatic() {
     pop();
     //Basel
     push();
-    stroke(weiss, 10);
+    stroke(weiss, 25);
     strokeWeight(liniendicke);
     translate((windowWidth / 4) * 3, windowHeight / 2);
     line(
@@ -321,7 +321,7 @@ function draw() {
 }
 
 function drawSpiralSkalaZürich() {
-  background(0, 60);
+  // background(0, 60);
 
   fill(0);
   rect(0, 0, windowWidth / 4, jahrpadding);
@@ -348,15 +348,7 @@ function drawSpiralSkalaZürich() {
     120,
     "MWH",
   ];
-  let wochentage = [
-    "18:00 Uhr",
-    "18:00",
-    "Mitternacht",
-    "6:00",
-    "Fr",
-    "Sa",
-    "So",
-  ];
+  let wochentage = ["18:00 Uhr", "18:00", "00:00", "6:00"];
   let positions = [];
   let längeGrafik = width - 2 * paddinglinksrechts;
   let einAbschnitt = längeGrafik / 7;
@@ -389,7 +381,7 @@ function drawSpiralSkalaZürich() {
       textSize(skalaTextgrösse);
       noStroke();
       fill(skalaFarbe);
-      text(wochentag, 13 * eineSkalahöheX, 13 * eineSkalahöheY);
+      text(wochentag, 13.5 * eineSkalahöheX, 13.5 * eineSkalahöheY);
     }
 
     if (i == 0) {
@@ -541,15 +533,7 @@ function drawSpiralSkalaBasel() {
     120,
     "MWH",
   ];
-  let wochentage = [
-    "18:00 Uhr",
-    "18:00",
-    "Mitternacht",
-    "6:00",
-    "Fr",
-    "Sa",
-    "So",
-  ];
+  let wochentage = ["18:00 Uhr", "18:00", "00:00", "6:00", "Fr", "Sa", "So"];
   let positions = [];
   let längeGrafik = width - 2 * paddinglinksrechts;
   let einAbschnitt = längeGrafik / 7;
@@ -582,7 +566,7 @@ function drawSpiralSkalaBasel() {
       textSize(skalaTextgrösse);
       noStroke();
       fill(skalaFarbe);
-      text(wochentag, 13 * eineSkalahöheX, 13 * eineSkalahöheY);
+      text(wochentag, 13.5 * eineSkalahöheX, 13.5 * eineSkalahöheY);
     }
 
     if (i == 0) {

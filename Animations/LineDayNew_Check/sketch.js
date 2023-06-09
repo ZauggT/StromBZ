@@ -62,8 +62,8 @@ let timerTextgrösse;
 let myFont;
 
 let ratio = 1.77;
-let ratioPaddinglinksrechts = 8;
-let ratioPaddingobenunten = 12;
+let ratioPaddinglinksrechts;
+let ratioPaddingobenunten;
 
 let jahr = 2019;
 
@@ -76,60 +76,53 @@ function setup() {
   valueArray = [];
   createCanvas(windowWidth, windowHeight); //3840 x 2160
   background(0);
-  paddinglinksrechts = windowWidth / ratioPaddinglinksrechts;
+  if (windowWidth < windowHeight) {
+    ratioPaddinglinksrechts = 12;
+    ratioPaddingobenunten = 8;
+  }
+
+  if (windowWidth > windowHeight) {
+    ratioPaddinglinksrechts = 8;
+    ratioPaddingobenunten = 12;
+  }
+  paddinglinksrechts = windowHeight / ratioPaddinglinksrechts;
   paddingobenunten = windowWidth / ratioPaddingobenunten;
   jahrpadding = paddingobenunten / 2;
+  längeGrafik = windowWidth - 2 * paddinglinksrechts;
+  einAbschnitt = längeGrafik / 14;
 
   myFont = loadFont("Roboto-Regular.ttf");
   textFont(myFont);
 
-  /*   zürichbaselabstand = paddinglinksrechts / 2;
-  abstandobenunten = paddingobenunten / 3;
-  abstandTag = (paddingobenunten / 4) * 3;
-  abstandSkala = paddinglinksrechts / 2;
-  textgrösseTitelYahr = ceil(windowWidth / 100);
-  textgrösseZBKWH = ceil(windowWidth / 100);
-  textgrösseTageMonate = ceil(windowWidth / 100);
-  lineLength = ceil(windowWidth / 250);
-  if (textgrösseTitelYahr < 22) {
-    textgrösseTitelYahr = 22;
-  }
-  if (textgrösseZBKWH < 16) {
-    textgrösseZBKWH = 16;
-  }
-  if (textgrösseTageMonate < 16) {
-    textgrösseTageMonate = 16;
-  } */
-
   zürichbaselabstand = paddinglinksrechts / 2;
   abstandobenunten = paddingobenunten / 3;
   abstandTag = (paddingobenunten / 4) * 3;
-  abstandSkala = paddinglinksrechts / 2;
-  titelJahrgrösse = floor(windowWidth / 80);
-  stadtTextgrösse = floor(windowWidth / 100);
-  timerTextgrösse = floor(windowWidth / 120);
-  skalaTextgrösse = floor(windowWidth / 120);
-  lineLength = ceil(windowWidth / 250);
+  abstandSkala = paddinglinksrechts / 1;
+  titelJahrgrösse = floor(windowHeight / 70);
+  stadtTextgrösse = floor(windowHeight / 70);
+  timerTextgrösse = floor(windowHeight / 90);
+  skalaTextgrösse = floor(windowHeight / 90);
+  lineLength = ceil(windowHeight / 250);
   skalaFarbe = 100;
-  liniendicke = floor(windowWidth / 1500);
+  liniendicke = 1;
 
-  if (liniendicke <= 0) {
+  if (liniendicke <= 0.1) {
     liniendicke = 0.5;
   }
 
   //console.log(timerTextgrösse);
 
-  if (titelJahrgrösse < 15) {
-    titelJahrgrösse = 15;
+  if (titelJahrgrösse < 20) {
+    titelJahrgrösse = 20;
   }
-  if (stadtTextgrösse < 11) {
-    stadtTextgrösse = 11;
+  if (stadtTextgrösse < 16) {
+    stadtTextgrösse = 16;
   }
-  if (timerTextgrösse < 11) {
-    timerTextgrösse = 11;
+  if (timerTextgrösse < 16) {
+    timerTextgrösse = 16;
   }
-  if (skalaTextgrösse < 11) {
-    skalaTextgrösse = 11;
+  if (skalaTextgrösse < 14) {
+    skalaTextgrösse = 14;
   }
 
   numRows = data.getRowCount();
@@ -302,12 +295,12 @@ function draw() {
 }
 
 function drawSkala() {
-  background(0, 10);
+  background(0, 20);
   strokeCap(ROUND);
   let schriftFarbe = 255;
   let linienDicke = 0.5;
   let zahlenSkala = [20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130];
-  let wochentage = ["Morgen", "Mittag", "Nachmittag", "Abend"];
+  let wochentage = ["00:00", "6:00", "12:00", "18:00", "00:00"];
   let positions = [];
   let längeGrafik = width - 2 * paddinglinksrechts;
   let einAbschnitt = längeGrafik / 3;
@@ -320,26 +313,26 @@ function drawSkala() {
     let positionWochentagX = map(
       i,
       0,
-      3,
+      4,
       paddinglinksrechts,
       width - paddinglinksrechts
     );
 
-    if (i == 1) {
-      textAlign(CENTER, CENTER);
+    // if (i == 1) {
+    textAlign(CENTER, CENTER);
 
-      textSize(skalaTextgrösse);
-      noStroke();
-      /*     stroke(schriftFarbe);
+    textSize(skalaTextgrösse);
+    noStroke();
+    /*     stroke(schriftFarbe);
     strokeWeight(schriftDicke); */
-      fill(skalaFarbe);
-      text(tag, positionWochentagX + mitteAbschnitt, abstandTag);
-      /*     ellipse(
+    fill(skalaFarbe);
+    text(tag, positionWochentagX, abstandTag);
+    /*     ellipse(
       positionWochentagX + mitteAbschnitt,
       height - paddingobenunten + 1,
       2
     ); */
-    }
+    // }
   }
 
   for (let i = 0; i <= 11; i++) {
@@ -429,7 +422,7 @@ function drawSkala() {
 
   textSize(titelJahrgrösse);
   textAlign(CENTER, CENTER);
-  text("Stromverbrauch pro Tag", paddinglinksrechts, abstandobenunten);
+  text("Stromverbrauch pro Tag", windowWidth / 2, abstandobenunten);
   /*   textAlign(RIGHT, CENTER);
   textSize(timerTextgrösse);
   text(
@@ -437,7 +430,7 @@ function drawSkala() {
     width - paddinglinksrechts,
     height - jahrpadding
   ); */
-  textAlign(CENTER, CENTER);
+  textAlign(RIGHT, CENTER);
   textSize(timerTextgrösse);
   text(
     "MWh = Megawattstunden",
