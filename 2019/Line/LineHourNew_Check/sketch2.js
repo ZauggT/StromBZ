@@ -62,10 +62,13 @@ let timerTextgrösse;
 let myFont;
 
 let ratio = 1.77;
+/////
 let ratioPaddinglinksrechts;
 let ratioPaddingobenunten;
 
-let jahr = 2019;
+/////
+
+let jahr = 2019; /// Das nicht!
 
 function preload() {
   data = loadTable("dataStromTemp15Min.csv", "csv", "header");
@@ -126,8 +129,6 @@ function setup() {
   if (skalaTextgrösse < 14) {
     skalaTextgrösse = 14;
   }
-
-  console.log(titelJahrgrösse);
 
   numRows = data.getRowCount();
   let zurichStromValues = int(data.getColumn("StromverbrauchZurich"));
@@ -231,8 +232,8 @@ function lineStatic() {
 
   for (let i = 0; i < valueArray.length - 1; i++) {
     let quarterHourH = valueArray[i][5];
-    stroke(weiss, 20);
-    strokeWeight(ceil(windowWidth / 1500));
+    stroke(weiss, 5);
+    strokeWeight(ceil(windowWidth / 2000));
     if (quarterHourH != 95) {
       line(
         valueArray[i][2],
@@ -255,6 +256,7 @@ function lineStatic() {
   textSize(timerTextgrösse);
 
   text(jahr, width / 2, height - jahrpadding);
+  console.log(windowWidth / 2000);
 }
 
 function lineAnim() {
@@ -307,8 +309,8 @@ function lineAnim() {
 function drawStaticGraphic() {}
 
 function draw() {
-  //lineStatic();
-  lineAnim();
+  lineStatic();
+  //lineAnim();
   drawSkala();
 }
 
