@@ -67,8 +67,8 @@ let timerTextgrösse;
 let strokeDickeArc;
 
 let ratio = 1.77;
-let ratioPaddinglinksrechts = 8;
-let ratioPaddingobenunten = 12;
+let ratioPaddinglinksrechts;
+let ratioPaddingobenunten;
 
 let jahr = 2019;
 
@@ -82,6 +82,15 @@ function setup() {
   valueArray = [];
   createCanvas(windowWidth, windowHeight); //3840 x 2160
   background(0);
+  if (windowWidth < windowHeight) {
+    ratioPaddinglinksrechts = 12;
+    ratioPaddingobenunten = 8;
+  }
+
+  if (windowWidth > windowHeight) {
+    ratioPaddinglinksrechts = 8;
+    ratioPaddingobenunten = 12;
+  }
   paddinglinksrechts = windowWidth / ratioPaddinglinksrechts;
   paddingobenunten = windowWidth / ratioPaddingobenunten;
   jahrpadding = paddingobenunten / 2;
@@ -97,13 +106,13 @@ function setup() {
   abstandobenunten = paddingobenunten / 3;
   abstandTag = (paddingobenunten / 4) * 3;
   abstandSkala = paddinglinksrechts / 2;
-  titelJahrgrösse = floor(windowWidth / 80);
-  stadtTextgrösse = floor(windowWidth / 100);
-  timerTextgrösse = floor(windowWidth / 120);
-  skalaTextgrösse = floor(windowWidth / 120);
-  lineLength = ceil(windowWidth / 250);
+  titelJahrgrösse = floor(windowHeight / 70);
+  stadtTextgrösse = floor(windowHeight / 70);
+  timerTextgrösse = floor(windowHeight / 90);
+  skalaTextgrösse = floor(windowHeight / 90);
+  lineLength = ceil(windowHeight / 250);
   skalaFarbe = 100;
-  liniendicke = floor(windowWidth / 1500);
+  liniendicke = floor(windowHeight / 300);
 
   if (liniendicke <= 0) {
     liniendicke = 0.5;
@@ -111,17 +120,17 @@ function setup() {
 
   //console.log(timerTextgrösse);
 
-  if (titelJahrgrösse < 15) {
-    titelJahrgrösse = 15;
+  if (titelJahrgrösse < 20) {
+    titelJahrgrösse = 20;
   }
-  if (stadtTextgrösse < 11) {
-    stadtTextgrösse = 11;
+  if (stadtTextgrösse < 16) {
+    stadtTextgrösse = 16;
   }
-  if (timerTextgrösse < 11) {
-    timerTextgrösse = 11;
+  if (timerTextgrösse < 16) {
+    timerTextgrösse = 16;
   }
-  if (skalaTextgrösse < 11) {
-    skalaTextgrösse = 11;
+  if (skalaTextgrösse < 14) {
+    skalaTextgrösse = 14;
   }
 
   /*   if (windowHeight > windowWidth) {
@@ -245,6 +254,7 @@ function SpiralStatic() {
 }
 
 function spiralAnim() {
+  background(0, 10);
   /*   fill(0);
     noStroke();
     rect(0, 0, width, paddingobenunten + 1);
@@ -324,10 +334,10 @@ function draw() {
 }
 
 function drawSpiralSkalaZürich() {
-  background(0, 50);
+  background(0, 20);
 
   fill(0);
-  rect(0, 0, windowWidth / 4, jahrpadding);
+  rect(windowWidth / 3, 0, windowWidth / 3, jahrpadding);
   rect(
     windowWidth - windowWidth / 4,
     height - jahrpadding - 10,
@@ -354,7 +364,7 @@ function drawSpiralSkalaZürich() {
   let wochentage = [
     "Jan",
     "Feb",
-    "März",
+    " März",
     "Apr",
     "Mai",
     "Jun",
@@ -394,18 +404,18 @@ function drawSpiralSkalaZürich() {
     eineSkalahöheY2 = y2 / 12;
 
     textSize(skalaTextgrösse);
-    noStroke();
+    stroke(0);
     fill(skalaFarbe);
-    text(wochentag, 13 * eineSkalahöheX2, 13 * eineSkalahöheY2);
+    text(wochentag, 13.5 * eineSkalahöheX2, 13.5 * eineSkalahöheY2);
 
     if (i == 0) {
-      noStroke();
+      stroke(0);
       fill(skalaFarbe);
       textSize(skalaTextgrösse);
       text("MWh", 13 * eineSkalahöheX, 13 * eineSkalahöheY);
       // text("MWh", 13 * eineSkalahöheX, 13 * eineSkalahöheY);
       textSize(stadtTextgrösse);
-      noStroke();
+      stroke(0);
       fill(weiss);
       text("Zürich", 14.5 * eineSkalahöheX, 14.5 * eineSkalahöheY);
 
@@ -455,7 +465,7 @@ function drawSpiralSkalaZürich() {
     }
 
     /*     if (i == 6) {
-            noStroke();
+           stroke(0)
             fill(255);
             textAlign(CENTER, CENTER);
             textSize(stadtTextgrösse);
@@ -477,7 +487,7 @@ function drawSpiralSkalaZürich() {
 
     if (i >= 2 && i % 2 == 0) {
       textSize(skalaTextgrösse);
-      noStroke();
+      stroke(0);
       fill(skalaFarbe);
 
       text(skala, 0, -pos);
@@ -512,12 +522,12 @@ function drawSpiralSkalaZürich() {
         console.log("skala", skalaTextgrösse);
         console.log("timer", timerTextgrösse);
         console.log("stadt", stadtTextgrösse); */
-  noStroke();
+  stroke(0);
   fill(255);
   textSize(titelJahrgrösse);
   textAlign(CENTER, CENTER);
-  text("Stromverbrauch pro Monat", paddinglinksrechts, abstandobenunten);
-
+  text("Stromverbrauch pro Monat", windowWidth / 2, abstandobenunten);
+  textAlign(RIGHT, CENTER);
   textSize(timerTextgrösse);
   text(
     "MWh = Megawattstunden",
@@ -549,7 +559,7 @@ function drawSpiralSkalaBasel() {
   let wochentage = [
     "Jan",
     "Feb",
-    "März",
+    " März",
     "Apr",
     "Mai",
     "Jun",
@@ -589,18 +599,18 @@ function drawSpiralSkalaBasel() {
     eineSkalahöheY2 = y2 / 12;
 
     textSize(skalaTextgrösse);
-    noStroke();
+    stroke(0);
     fill(skalaFarbe);
-    text(wochentag, 13 * eineSkalahöheX2, 13 * eineSkalahöheY2);
+    text(wochentag, 13.5 * eineSkalahöheX2, 13.5 * eineSkalahöheY2);
 
     if (i == 0) {
-      noStroke();
+      stroke(0);
       fill(skalaFarbe);
       textSize(skalaTextgrösse);
       text("MWh", 13 * eineSkalahöheX, 13 * eineSkalahöheY);
       // text("MWh", 13 * eineSkalahöheX, 13 * eineSkalahöheY);
       textSize(stadtTextgrösse);
-      noStroke();
+      stroke(0);
       fill(weiss);
       text("Basel", 14.5 * eineSkalahöheX, 14.5 * eineSkalahöheY);
 
@@ -650,7 +660,7 @@ function drawSpiralSkalaBasel() {
     }
 
     /*     if (i == 6) {
-            noStroke();
+            stroke(0)
             fill(255);
             textAlign(CENTER, CENTER);
             textSize(stadtTextgrösse);
@@ -672,7 +682,7 @@ function drawSpiralSkalaBasel() {
 
     if (i >= 2 && i % 2 == 0) {
       textSize(skalaTextgrösse);
-      noStroke();
+      stroke(0);
       fill(skalaFarbe);
 
       text(skala, 0, -pos);

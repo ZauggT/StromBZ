@@ -200,10 +200,11 @@ function windowResized() {
 }
 function resizeAction() {
   setup();
+  redraw();
 }
 
 function lineStatic() {
-  noLoop();
+  // noLoop();
   strokeCap(SQUARE);
 
   background(0);
@@ -213,8 +214,8 @@ function lineStatic() {
 
     noStroke();
     fill(255);
-    ellipse(valueArray[i][0], valueArray[i][2], ceil(windowWidth / 2000));
-    ellipse(valueArray[i][0], valueArray[i][1], ceil(windowWidth / 2000));
+    ellipse(valueArray[i][0], valueArray[i][2], 1);
+    ellipse(valueArray[i][0], valueArray[i][1], 1);
 
     /*     stroke(255, 40);
     strokeWeight(ceil(windowWidth / 1500));
@@ -236,7 +237,7 @@ function lineStatic() {
   }
   fill(255);
   textAlign(CENTER, CENTER);
-  textSize(textgrösseTitelYahr);
+  textSize(timerTextgrösse);
   noStroke();
   text(jahr, width / 2, height - jahrpadding);
 }

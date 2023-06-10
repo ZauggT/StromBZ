@@ -270,7 +270,7 @@ function spiralAnim() {
     translate(windowWidth / 4, windowHeight / 2);
 
     // ellipse(0, 0, windowHeight);
-    // line(0, 0, valueArray[counter][0], valueArray[counter][1]);
+    line(0, 0, valueArray[counter][0], valueArray[counter][1]);
     line(
       valueArray[counter - 1][0],
       valueArray[counter - 1][1],
@@ -282,7 +282,7 @@ function spiralAnim() {
     //Basel
     push();
     translate((windowWidth / 4) * 3, windowHeight / 2);
-    // line(0, 0, valueArray[counter][2], valueArray[counter][3]);
+    line(0, 0, valueArray[counter][2], valueArray[counter][3]);
     line(
       valueArray[counter - 1][2],
       valueArray[counter - 1][3],
@@ -307,10 +307,10 @@ function spiralAnim() {
 }
 
 function draw() {
-  strokeDickeArc = 0.1;
+  //strokeDickeArc = 0.1;
 
-  /*   drawSpiralSkalaZürich();
-  drawSpiralSkalaBasel(); */
+  drawSpiralSkalaZürich();
+  drawSpiralSkalaBasel();
 
   // SpiralStatic();
   strokeDickeArc = 0.1;
@@ -321,7 +321,7 @@ function drawSpiralSkalaZürich() {
   background(0, 20);
 
   fill(0);
-  rect(0, 0, windowWidth / 4, jahrpadding);
+  rect(windowWidth / 3, 0, windowWidth / 3, jahrpadding);
   rect(
     windowWidth - windowWidth / 4,
     height - jahrpadding - 10,
@@ -376,19 +376,19 @@ function drawSpiralSkalaZürich() {
 
     if (i >= 1) {
       textSize(skalaTextgrösse);
-      noStroke();
+      stroke(0);
       fill(skalaFarbe);
       text(wochentag, 13.5 * eineSkalahöheX, 13.5 * eineSkalahöheY);
     }
 
     if (i == 0) {
-      noStroke();
+      stroke(0);
       fill(skalaFarbe);
       textSize(skalaTextgrösse);
       text("MWh", 13 * eineSkalahöheX, 13 * eineSkalahöheY);
       // text("MWh", 13 * eineSkalahöheX, 13 * eineSkalahöheY);
       textSize(stadtTextgrösse);
-      noStroke();
+      stroke(0);
       fill(weiss);
       text("Basel", 14.5 * eineSkalahöheX, 14.5 * eineSkalahöheY);
 
@@ -460,7 +460,7 @@ function drawSpiralSkalaZürich() {
 
     if (i >= 2 && i % 2 == 0) {
       textSize(skalaTextgrösse);
-      noStroke();
+      stroke(0);
       fill(skalaFarbe);
 
       text(skala, 0, -pos);
@@ -561,19 +561,19 @@ function drawSpiralSkalaBasel() {
 
     if (i >= 1) {
       textSize(skalaTextgrösse);
-      noStroke();
+      stroke(0);
       fill(skalaFarbe);
       text(wochentag, 13.5 * eineSkalahöheX, 13.5 * eineSkalahöheY);
     }
 
     if (i == 0) {
-      noStroke();
+      stroke(0);
       fill(skalaFarbe);
       textSize(skalaTextgrösse);
       text("MWh", 13 * eineSkalahöheX, 13 * eineSkalahöheY);
       // text("MWh", 13 * eineSkalahöheX, 13 * eineSkalahöheY);
       textSize(stadtTextgrösse);
-      noStroke();
+      stroke(0);
       fill(weiss);
       text("Zürich", 14.5 * eineSkalahöheX, 14.5 * eineSkalahöheY);
 
@@ -645,7 +645,7 @@ function drawSpiralSkalaBasel() {
 
     if (i >= 2 && i % 2 == 0) {
       textSize(skalaTextgrösse);
-      noStroke();
+      stroke(0);
       fill(skalaFarbe);
 
       text(skala, 0, -pos);
@@ -696,8 +696,11 @@ function setLineDash(list) {
 
 function keyPressed() {
   // this will download the first 5 seconds of the animation!
-  if (key === "s") {
+  if (key === "g") {
     saveGif("mySketch", 5, frames);
+  }
+  if (key === "s") {
+    saveCanvas("myCanvas", "png");
   }
 }
 

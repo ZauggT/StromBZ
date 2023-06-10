@@ -67,8 +67,8 @@ let timerTextgrösse;
 let strokeDickeArc;
 
 let ratio = 1.77;
-let ratioPaddinglinksrechts = 8;
-let ratioPaddingobenunten = 12;
+let ratioPaddinglinksrechts;
+let ratioPaddingobenunten;
 
 let jahr = 2019;
 
@@ -82,6 +82,16 @@ function setup() {
   valueArray = [];
   createCanvas(windowWidth, windowHeight); //3840 x 2160
   background(0);
+
+  if (windowWidth < windowHeight) {
+    ratioPaddinglinksrechts = 12;
+    ratioPaddingobenunten = 8;
+  }
+
+  if (windowWidth > windowHeight) {
+    ratioPaddinglinksrechts = 8;
+    ratioPaddingobenunten = 12;
+  }
   paddinglinksrechts = windowWidth / ratioPaddinglinksrechts;
   paddingobenunten = windowWidth / ratioPaddingobenunten;
   jahrpadding = paddingobenunten / 2;
@@ -96,14 +106,14 @@ function setup() {
   zürichbaselabstand = paddinglinksrechts / 2;
   abstandobenunten = paddingobenunten / 3;
   abstandTag = (paddingobenunten / 4) * 3;
-  abstandSkala = paddinglinksrechts / 2;
-  titelJahrgrösse = floor(windowWidth / 80);
-  stadtTextgrösse = floor(windowWidth / 100);
-  timerTextgrösse = floor(windowWidth / 120);
-  skalaTextgrösse = floor(windowWidth / 120);
-  lineLength = ceil(windowWidth / 250);
+  abstandSkala = paddinglinksrechts / 1;
+  titelJahrgrösse = floor(windowHeight / 70);
+  stadtTextgrösse = floor(windowHeight / 70);
+  timerTextgrösse = floor(windowHeight / 90);
+  skalaTextgrösse = floor(windowHeight / 90);
+  lineLength = ceil(windowHeight / 250);
   skalaFarbe = 100;
-  liniendicke = floor(windowWidth / 1500);
+  liniendicke = floor(windowHeight / 1500);
 
   if (liniendicke <= 0) {
     liniendicke = 0.5;
@@ -111,17 +121,17 @@ function setup() {
 
   //console.log(timerTextgrösse);
 
-  if (titelJahrgrösse < 15) {
-    titelJahrgrösse = 15;
+  if (titelJahrgrösse < 20) {
+    titelJahrgrösse = 20;
   }
-  if (stadtTextgrösse < 11) {
-    stadtTextgrösse = 11;
+  if (stadtTextgrösse < 16) {
+    stadtTextgrösse = 16;
   }
-  if (timerTextgrösse < 11) {
-    timerTextgrösse = 11;
+  if (timerTextgrösse < 16) {
+    timerTextgrösse = 16;
   }
-  if (skalaTextgrösse < 11) {
-    skalaTextgrösse = 11;
+  if (skalaTextgrösse < 14) {
+    skalaTextgrösse = 14;
   }
 
   /*   if (windowHeight > windowWidth) {
@@ -215,6 +225,7 @@ function SpiralStatic() {
       noStroke();
       fill(weiss);
       ellipse(valueArray[i][0], valueArray[i][1], ceil(windowWidth / 1500));
+
       pop();
       //Basel
       push();
@@ -238,50 +249,38 @@ function SpiralStatic() {
 }
 
 function spiralAnim() {
-  /*   fill(0);
-      noStroke();
-      rect(0, 0, width, paddingobenunten + 1);
-      // rect(0, 0, paddinglinksrechts + 1, height);
-      rect(0, height - paddingobenunten - 1, width, height);
-      // rect(width - paddinglinksrechts - 1, 0, width, height);
-      // rect(width / 4 - skalaTextgrösse - 1, 0, 2 * skalaTextgrösse, height / 2); */
-  /*   noStroke();
-  fill(100);
-  rect(width / 3, 0, 3.5 * paddinglinksrechts, 0.7 * paddingobenunten + 1);
-  // rect(0, 0, paddinglinksrechts + 1, height);
-  rect(
-    width / 2 - paddinglinksrechts,
-    height - 0.7 * paddingobenunten - 1,
-    2 * paddinglinksrechts,
-    height
-  ); */
+  // background(0, 10);
 
   if (millis() - previousTime >= 1) {
     counter += 1; // Increment the counter
     previousTime = millis(); // Update the previous time
   }
   if (counter != 0) {
-    stroke(255);
+    strokeWeight(2);
+    stroke(weiss);
     //Zürich
     push();
     translate(windowWidth / 4, windowHeight / 2);
 
-    noStroke();
-    fill(255);
-    ellipse(
+    // ellipse(0, 0, windowHeight);
+    line(0, 0, valueArray[counter][0], valueArray[counter][1]);
+    line(
+      valueArray[counter - 1][0],
+      valueArray[counter - 1][1],
       valueArray[counter][0],
-      valueArray[counter][1],
-      ceil(windowWidth / 2000)
+      valueArray[counter][1]
     );
 
     pop();
     //Basel
     push();
     translate((windowWidth / 4) * 3, windowHeight / 2);
-    ellipse(
+    line(0, 0, valueArray[counter][2], valueArray[counter][3]);
+    line(
+      valueArray[counter - 1][2],
+      valueArray[counter - 1][3],
       valueArray[counter][2],
-      valueArray[counter][3],
-      ceil(windowWidth / 2000)
+      valueArray[counter][3]
     );
     pop();
   }
@@ -298,18 +297,6 @@ function spiralAnim() {
   if (counter > numRows) {
     counter = 0;
   }
-
-  fill(255);
-  stroke(255);
-  strokeWeight(0.2);
-  textAlign(CENTER, CENTER);
-  textSize(timerTextgrösse);
-
-  text(valueArray[counter][4] + " " + "Uhr", width / 2, height - jahrpadding);
-  // text(valueArray[counter][4] + " " + "Uhr", width / 2, height - jahrpadding);
-  if (counter > numRows) {
-    counter = 0;
-  }
 }
 
 function draw() {
@@ -317,19 +304,19 @@ function draw() {
 
   drawSpiralSkalaZürich();
   drawSpiralSkalaBasel();
-
-  //SpiralStatic();
   strokeDickeArc = 0.1;
   spiralAnim();
+
+  //SpiralStatic();
 }
 
 function drawSpiralSkalaZürich() {
-  background(0, 30);
-  noStroke();
+  background(0, 15);
+
   fill(0);
-  rect(0, 0, windowWidth / 4, jahrpadding);
+  rect(windowWidth / 3, 0, windowWidth / 3, jahrpadding);
   rect(
-    windowWidth - windowWidth / 4,
+    windowWidth - windowWidth / 3,
     height - jahrpadding - 10,
     windowWidth / 2,
     jahrpadding
@@ -354,7 +341,7 @@ function drawSpiralSkalaZürich() {
   let wochentage = [
     "Jan",
     "Feb",
-    "März",
+    " März",
     "Apr",
     "Mai",
     "Jun",
@@ -394,23 +381,23 @@ function drawSpiralSkalaZürich() {
     eineSkalahöheY2 = y2 / 12;
 
     textSize(skalaTextgrösse);
-    noStroke();
+    stroke(0);
     fill(skalaFarbe);
-    text(wochentag, 13 * eineSkalahöheX2, 13 * eineSkalahöheY2);
+    text(wochentag, 13.5 * eineSkalahöheX2, 13.5 * eineSkalahöheY2);
 
     if (i == 0) {
-      noStroke();
+      stroke(0);
       fill(skalaFarbe);
       textSize(skalaTextgrösse);
       text("MWh", 13 * eineSkalahöheX, 13 * eineSkalahöheY);
       // text("MWh", 13 * eineSkalahöheX, 13 * eineSkalahöheY);
       textSize(stadtTextgrösse);
-      noStroke();
+      stroke(0);
       fill(weiss);
       text("Zürich", 14.5 * eineSkalahöheX, 14.5 * eineSkalahöheY);
 
       stroke(skalaFarbe);
-      strokeWeight(strokeDickeArc);
+      strokeWeight(0.1);
       line(
         2.5 * eineSkalahöheX,
         2.5 * eineSkalahöheY,
@@ -445,7 +432,7 @@ function drawSpiralSkalaZürich() {
 
     if (i >= 1) {
       stroke(skalaFarbe);
-      strokeWeight(strokeDickeArc);
+      strokeWeight(0.1);
       line(
         2 * eineSkalahöheX,
         2 * eineSkalahöheY,
@@ -477,7 +464,7 @@ function drawSpiralSkalaZürich() {
 
     if (i >= 2 && i % 2 == 0) {
       textSize(skalaTextgrösse);
-      noStroke();
+      stroke(0);
       fill(skalaFarbe);
 
       text(skala, 0, -pos);
@@ -509,8 +496,9 @@ function drawSpiralSkalaZürich() {
   fill(255);
   textSize(titelJahrgrösse);
   textAlign(CENTER, CENTER);
-  text("Stromverbrauch über das Jahr", paddinglinksrechts, abstandobenunten);
+  text("Stromverbrauch über das Jahr", windowWidth / 2, abstandobenunten);
 
+  textAlign(RIGHT, CENTER);
   textSize(timerTextgrösse);
   text(
     "MWh = Megawattstunden",
@@ -542,7 +530,7 @@ function drawSpiralSkalaBasel() {
   let wochentage = [
     "Jan",
     "Feb",
-    "März",
+    " März",
     "Apr",
     "Mai",
     "Jun",
@@ -582,9 +570,9 @@ function drawSpiralSkalaBasel() {
     eineSkalahöheY2 = y2 / 12;
 
     textSize(skalaTextgrösse);
-    noStroke();
+    stroke(0);
     fill(skalaFarbe);
-    text(wochentag, 13 * eineSkalahöheX2, 13 * eineSkalahöheY2);
+    text(wochentag, 13.5 * eineSkalahöheX2, 13.5 * eineSkalahöheY2);
 
     if (i == 0) {
       noStroke();
@@ -593,7 +581,7 @@ function drawSpiralSkalaBasel() {
       text("MWh", 13 * eineSkalahöheX, 13 * eineSkalahöheY);
       // text("MWh", 13 * eineSkalahöheX, 13 * eineSkalahöheY);
       textSize(stadtTextgrösse);
-      noStroke();
+      stroke(0);
       fill(weiss);
       text("Basel", 14.5 * eineSkalahöheX, 14.5 * eineSkalahöheY);
 
@@ -665,7 +653,7 @@ function drawSpiralSkalaBasel() {
 
     if (i >= 2 && i % 2 == 0) {
       textSize(skalaTextgrösse);
-      noStroke();
+      stroke(0);
       fill(skalaFarbe);
 
       text(skala, 0, -pos);

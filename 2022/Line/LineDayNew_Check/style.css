@@ -2,3 +2,6 @@ canvas {
   /*   transform-origin: 0 0;
   transform: scale(0.3); */
 }
+body {
+  background-color: black;
+}

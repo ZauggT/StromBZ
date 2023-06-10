@@ -67,8 +67,8 @@ let timerTextgrösse;
 let strokeDickeArc;
 
 let ratio = 1.77;
-let ratioPaddinglinksrechts = 8;
-let ratioPaddingobenunten = 12;
+let ratioPaddinglinksrechts;
+let ratioPaddingobenunten;
 
 let jahr = 2021;
 
@@ -82,6 +82,16 @@ function setup() {
   valueArray = [];
   createCanvas(windowWidth, windowHeight); //3840 x 2160
   background(0);
+
+  if (windowWidth < windowHeight) {
+    ratioPaddinglinksrechts = 12;
+    ratioPaddingobenunten = 8;
+  }
+
+  if (windowWidth > windowHeight) {
+    ratioPaddinglinksrechts = 8;
+    ratioPaddingobenunten = 12;
+  }
   paddinglinksrechts = windowWidth / ratioPaddinglinksrechts;
   paddingobenunten = windowWidth / ratioPaddingobenunten;
   jahrpadding = paddingobenunten / 2;
@@ -91,37 +101,39 @@ function setup() {
 
   angleMode(DEGREES);
 
-  linedashKoeff = ceil(windowWidth / 300);
+  linedashKoeff = ceil(windowWidth / 500);
 
   zürichbaselabstand = paddinglinksrechts / 2;
   abstandobenunten = paddingobenunten / 3;
   abstandTag = (paddingobenunten / 4) * 3;
-  abstandSkala = paddinglinksrechts / 2;
-  titelJahrgrösse = floor(windowWidth / 80);
-  stadtTextgrösse = floor(windowWidth / 100);
-  timerTextgrösse = floor(windowWidth / 120);
-  skalaTextgrösse = floor(windowWidth / 120);
-  lineLength = ceil(windowWidth / 250);
+  abstandSkala = paddinglinksrechts / 1;
+  titelJahrgrösse = floor(windowHeight / 70);
+  stadtTextgrösse = floor(windowHeight / 70);
+  timerTextgrösse = floor(windowHeight / 90);
+  skalaTextgrösse = floor(windowHeight / 90);
+  lineLength = ceil(windowHeight / 250);
   skalaFarbe = 100;
-  liniendicke = floor(windowWidth / 1500);
+  liniendicke = 0.2;
+
+  //console.log(timerTextgrösse);
 
   if (liniendicke <= 0) {
-    liniendicke = 0.5;
+    liniendicke = 0.2;
   }
 
   //console.log(timerTextgrösse);
 
-  if (titelJahrgrösse < 15) {
-    titelJahrgrösse = 15;
+  if (titelJahrgrösse < 20) {
+    titelJahrgrösse = 20;
   }
-  if (stadtTextgrösse < 11) {
-    stadtTextgrösse = 11;
+  if (stadtTextgrösse < 16) {
+    stadtTextgrösse = 16;
   }
-  if (timerTextgrösse < 11) {
-    timerTextgrösse = 11;
+  if (timerTextgrösse < 16) {
+    timerTextgrösse = 16;
   }
-  if (skalaTextgrösse < 11) {
-    skalaTextgrösse = 11;
+  if (skalaTextgrösse < 14) {
+    skalaTextgrösse = 14;
   }
 
   /*   if (windowHeight > windowWidth) {
@@ -204,7 +216,7 @@ function SpiralStatic() {
 
   strokeCap(SQUARE);
   for (let i = 0; i < valueArray.length - 1; i++) {
-    stroke(weiss, 20);
+    stroke(weiss, 7);
     strokeWeight(liniendicke);
     //Zürich
     push();
@@ -218,8 +230,8 @@ function SpiralStatic() {
     pop();
     //Basel
     push();
-    stroke(weiss, 10);
-    strokeWeight(liniendicke);
+    stroke(weiss, 5);
+    strokeWeight(0.2);
     translate((windowWidth / 4) * 3, windowHeight / 2);
     line(
       valueArray[i][2],
@@ -308,7 +320,7 @@ function draw() {
 }
 
 function drawSpiralSkalaZürich() {
-  background(0, 60);
+  // background(0, 60);
 
   fill(0);
   rect(0, 0, windowWidth / 4, jahrpadding);
@@ -463,15 +475,26 @@ function drawSpiralSkalaZürich() {
       line(pos, 0, 0, pos);
       line(0, pos, -pos, 0);
       line(-pos, 0, -skalaTextgrösse, -pos + skalaTextgrösse);
-
-      /*     noFill();
-          strokeWeight(1);
-          stroke(100);
-          rotate(64);
-          setLineDash([linedashKoeff, linedashKoeff]);
-          //ellipse(0, 0, skalaMapping * 2);
-          arc(0, 0, skalaMapping * 2, skalaMapping * 2, 33, 379, OPEN); */
     }
+
+    if (i > 4 && i < 12 && i % 2 == 0) {
+      textSize(skalaTextgrösse);
+      noStroke();
+      fill("black");
+
+      text(skala, 0, -pos);
+
+      setLineDash([linedashKoeff, linedashKoeff]);
+
+      noFill();
+      strokeWeight(strokeDickeArc);
+      stroke("black");
+      line(skalaTextgrösse, -pos + skalaTextgrösse, pos, 0);
+      line(pos, 0, 0, pos);
+      line(0, pos, -pos, 0);
+      line(-pos, 0, -skalaTextgrösse, -pos + skalaTextgrösse);
+    }
+
     pop();
   }
   /*   console.log("titel", titelJahrgrösse);
@@ -482,8 +505,9 @@ function drawSpiralSkalaZürich() {
   fill(255);
   textSize(titelJahrgrösse);
   textAlign(CENTER, CENTER);
-  text("Stromverbrauch pro Stunde", paddinglinksrechts, abstandobenunten);
+  text("Stromverbrauch pro Stunde", windowWidth / 2, abstandobenunten);
 
+  textAlign(RIGHT, CENTER);
   textSize(timerTextgrösse);
   text(
     "MWh = Megawattstunden",
@@ -640,14 +664,23 @@ function drawSpiralSkalaBasel() {
       line(pos, 0, 0, pos);
       line(0, pos, -pos, 0);
       line(-pos, 0, -skalaTextgrösse, -pos + skalaTextgrösse);
+    }
+    if (i > 2 && i < 5 && i % 2 == 0) {
+      textSize(skalaTextgrösse);
+      noStroke();
+      fill("black");
 
-      /*     noFill();
-          strokeWeight(1);
-          stroke(100);
-          rotate(64);
-          setLineDash([linedashKoeff, linedashKoeff]);
-          //ellipse(0, 0, skalaMapping * 2);
-          arc(0, 0, skalaMapping * 2, skalaMapping * 2, 33, 379, OPEN); */
+      text(skala, 0, -pos);
+
+      setLineDash([linedashKoeff, linedashKoeff]);
+
+      noFill();
+      strokeWeight(strokeDickeArc);
+      stroke("black");
+      line(skalaTextgrösse, -pos + skalaTextgrösse, pos, 0);
+      line(pos, 0, 0, pos);
+      line(0, pos, -pos, 0);
+      line(-pos, 0, -skalaTextgrösse, -pos + skalaTextgrösse);
     }
     pop();
   }
