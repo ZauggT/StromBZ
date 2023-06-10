@@ -70,6 +70,12 @@ let ratioPaddingobenunten;
 
 let jahr = 2019; /// Das nicht!
 
+function keyPressed() {
+  if (key == "s") {
+    saveCanvas("Line_Hour_2022", "png");
+  }
+}
+
 function preload() {
   data = loadTable("dataStromTemp15Min.csv", "csv", "header");
 }
@@ -256,7 +262,7 @@ function lineStatic() {
   textSize(timerTextgrösse);
 
   text(jahr, width / 2, height - jahrpadding);
-  console.log(windowWidth / 2000);
+  // console.log(windowWidth / 2000);
 }
 
 function lineAnim() {

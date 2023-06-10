@@ -72,6 +72,12 @@ let ratioPaddingobenunten;
 
 let jahr = 2019;
 
+function keyPressed() {
+  if (key == "s") {
+    saveCanvas("Spiral_Year_2022", "png");
+  }
+}
+
 function preload() {
   data = loadTable("dataStromTemp15Min.csv", "csv", "header");
 }

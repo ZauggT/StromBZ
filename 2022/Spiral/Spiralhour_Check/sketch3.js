@@ -72,6 +72,12 @@ let ratioPaddingobenunten;
 
 let jahr = 2022;
 
+function keyPressed() {
+  if (key == "s") {
+    saveCanvas("Spiral_Hour_2022", "png");
+  }
+}
+
 function preload() {
   data = loadTable("dataStromTemp15Min.csv", "csv", "header");
 }
@@ -216,8 +222,8 @@ function SpiralStatic() {
 
   strokeCap(SQUARE);
   for (let i = 0; i < valueArray.length - 1; i++) {
-    stroke(weiss, 7);
-    strokeWeight(liniendicke);
+    stroke(weiss, 10);
+    strokeWeight(0.1);
     //Zürich
     push();
     translate(windowWidth / 4, windowHeight / 2);
@@ -230,8 +236,8 @@ function SpiralStatic() {
     pop();
     //Basel
     push();
-    stroke(weiss, 5);
-    strokeWeight(0.2);
+    stroke(weiss, 9);
+    strokeWeight(0.1);
     translate((windowWidth / 4) * 3, windowHeight / 2);
     line(
       valueArray[i][2],
@@ -480,7 +486,7 @@ function drawSpiralSkalaZürich() {
     if (i > 4 && i < 12 && i % 2 == 0) {
       textSize(skalaTextgrösse);
       noStroke();
-      fill("black");
+      fill(150);
 
       text(skala, 0, -pos);
 
@@ -488,7 +494,7 @@ function drawSpiralSkalaZürich() {
 
       noFill();
       strokeWeight(strokeDickeArc);
-      stroke("black");
+      stroke(150);
       line(skalaTextgrösse, -pos + skalaTextgrösse, pos, 0);
       line(pos, 0, 0, pos);
       line(0, pos, -pos, 0);
@@ -668,7 +674,7 @@ function drawSpiralSkalaBasel() {
     if (i > 2 && i < 5 && i % 2 == 0) {
       textSize(skalaTextgrösse);
       noStroke();
-      fill("black");
+      fill(150);
 
       text(skala, 0, -pos);
 
@@ -676,7 +682,7 @@ function drawSpiralSkalaBasel() {
 
       noFill();
       strokeWeight(strokeDickeArc);
-      stroke("black");
+      stroke(150);
       line(skalaTextgrösse, -pos + skalaTextgrösse, pos, 0);
       line(pos, 0, 0, pos);
       line(0, pos, -pos, 0);

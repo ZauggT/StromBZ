@@ -60,6 +60,12 @@ let ratioPaddingobenunten;
 
 let jahr = 2019;
 
+function keyPressed() {
+  if (key == "s") {
+    saveCanvas("Line_month_2022", "png");
+  }
+}
+
 function preload() {
   data = loadTable("dataStromTemp15Min.csv", "csv", "header");
 }
