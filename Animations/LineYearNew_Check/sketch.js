@@ -238,6 +238,7 @@ function lineStatic() {
 }
 
 function lineAnim() {
+  background(0, 5);
   strokeCap(SQUARE);
   fill(0);
   noStroke();
@@ -276,7 +277,7 @@ function lineAnim() {
   fill(weiss);
   textAlign(CENTER, CENTER);
   textSize(timerTextgrösse);
-  text(valueArray[counter][3], width / 2, height - jahrpadding);
+  // text(valueArray[counter][3], width / 2, height - jahrpadding);
 
   if (counter == numRows) {
     counter = 0;
@@ -289,7 +290,7 @@ function drawStaticGraphic() {}
 function draw() {
   // lineStatic();
   lineAnim();
-  drawSkala();
+  // drawSkala();
 }
 
 function drawSkala() {
@@ -626,4 +627,13 @@ function getDayOfYear(timestamp) {
 
   // Add 1 to the day of the year to make it 1-indexed
   return dayOfYear - 1;
+}
+function keyPressed() {
+  // this will download the first 5 seconds of the animation!
+  if (key === "g") {
+    saveGif("Line_Year_Anim", 5, 300);
+  }
+  if (key === "s") {
+    saveCanvas("myCanvas", "png");
+  }
 }

@@ -299,7 +299,7 @@ function spiralAnim() {
   textAlign(CENTER, CENTER);
   textSize(timerTextgrösse);
 
-  text(valueArray[counter][4] + " " + "Uhr", width / 2, height - jahrpadding);
+  //text(valueArray[counter][4] + " " + "Uhr", width / 2, height - jahrpadding);
   // text(valueArray[counter][4] + " " + "Uhr", width / 2, height - jahrpadding);
   if (counter > numRows) {
     counter = 0;
@@ -697,7 +697,7 @@ function setLineDash(list) {
 function keyPressed() {
   // this will download the first 5 seconds of the animation!
   if (key === "g") {
-    saveGif("mySketch", 5, frames);
+    saveGif("mySketch", 5, 300);
   }
   if (key === "s") {
     saveCanvas("myCanvas", "png");

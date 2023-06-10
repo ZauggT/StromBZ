@@ -247,7 +247,7 @@ function SpiralStatic() {
 }
 
 function spiralAnim() {
-  background(0, 10);
+  //background(0, 10);
   //fill(0);
   //noStroke();
   //rect(0, 0, width, paddingobenunten + 1);
@@ -723,4 +723,15 @@ function getDayOfYear(timestamp) {
 
   // Add 1 to the day of the year to make it 1-indexed
   return dayOfYear + 1;
+}
+let frames;
+
+function keyPressed() {
+  // this will download the first 5 seconds of the animation!
+  if (key === "g") {
+    saveGif("mySketch", 5, 300);
+  }
+  if (key === "s") {
+    saveCanvas("myCanvas", "png");
+  }
 }

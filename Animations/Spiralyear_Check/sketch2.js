@@ -747,3 +747,12 @@ function getDayOfYear(timestamp) {
   // Add 1 to the day of the year to make it 1-indexed
   return dayOfYear + 1;
 }
+function keyPressed() {
+  // this will download the first 5 seconds of the animation!
+  if (key === "g") {
+    saveGif("Spiral_Year_Anim", 5, 300);
+  }
+  if (key === "s") {
+    saveCanvas("myCanvas", "png");
+  }
+}
