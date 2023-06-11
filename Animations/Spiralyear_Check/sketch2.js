@@ -575,7 +575,7 @@ function drawSpiralSkalaBasel() {
     text(wochentag, 13.5 * eineSkalahöheX2, 13.5 * eineSkalahöheY2);
 
     if (i == 0) {
-      noStroke();
+      Stroke(0);
       fill(skalaFarbe);
       textSize(skalaTextgrösse);
       text("MWh", 13 * eineSkalahöheX, 13 * eineSkalahöheY);

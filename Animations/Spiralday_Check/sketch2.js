@@ -299,7 +299,7 @@ function spiralAnim() {
   textAlign(CENTER, CENTER);
   textSize(timerTextgrösse);
 
-  //text(valueArray[counter][4] + " " + "Uhr", width / 2, height - jahrpadding);
+  text(valueArray[counter][4] + " " + "Uhr", width / 2, height - jahrpadding);
   // text(valueArray[counter][4] + " " + "Uhr", width / 2, height - jahrpadding);
   if (counter > numRows) {
     counter = 0;

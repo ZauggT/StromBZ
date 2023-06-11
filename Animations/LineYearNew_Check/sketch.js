@@ -277,7 +277,7 @@ function lineAnim() {
   fill(weiss);
   textAlign(CENTER, CENTER);
   textSize(timerTextgrösse);
-  // text(valueArray[counter][3], width / 2, height - jahrpadding);
+  text(valueArray[counter][3], width / 2, height - jahrpadding);
 
   if (counter == numRows) {
     counter = 0;
@@ -290,7 +290,7 @@ function drawStaticGraphic() {}
 function draw() {
   // lineStatic();
   lineAnim();
-  // drawSkala();
+  drawSkala();
 }
 
 function drawSkala() {
