@@ -1,2 +1,3 @@
 # StromBZ
-Strom
+
+Code für die Webseite
