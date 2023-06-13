@@ -236,7 +236,7 @@ function lineAnim() {
   rect(0, height - paddingobenunten - 1, width, height);
   rect(width - paddinglinksrechts - 1, 0, width, height);
 
-  if (millis() - previousTime >= 1) {
+  if (millis() - previousTime >= 10) {
     counter++;
     previousTime = millis();
   }

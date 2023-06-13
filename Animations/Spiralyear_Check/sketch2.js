@@ -301,10 +301,10 @@ function spiralAnim() {
 
 function draw() {
   // strokeDickeArc = 0.5;
-
+  strokeDickeArc = 0.5;
   drawSpiralSkalaZürich();
   drawSpiralSkalaBasel();
-  strokeDickeArc = 0.1;
+
   spiralAnim();
 
   //SpiralStatic();
@@ -575,7 +575,7 @@ function drawSpiralSkalaBasel() {
     text(wochentag, 13.5 * eineSkalahöheX2, 13.5 * eineSkalahöheY2);
 
     if (i == 0) {
-      Stroke(0);
+      stroke(0);
       fill(skalaFarbe);
       textSize(skalaTextgrösse);
       text("MWh", 13 * eineSkalahöheX, 13 * eineSkalahöheY);
