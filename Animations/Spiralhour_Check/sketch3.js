@@ -256,7 +256,7 @@ function spiralAnim() {
   // rect(width - paddinglinksrechts - 1, 0, width, height);
   // rect(width / 4 - skalaTextgrösse - 1, 0, 2 * skalaTextgrösse, height / 2);
 
-  if (millis() - previousTime >= 60) {
+  if (millis() - previousTime >= 15) {
     counter += 1; // Increment the counter
     previousTime = millis(); // Update the previous time
   }

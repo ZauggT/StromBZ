@@ -105,7 +105,7 @@ function setup() {
   skalaTextgrösse = floor(windowHeight / 90);
   lineLength = ceil(windowHeight / 250);
   skalaFarbe = 100;
-  liniendicke = floor(windowHeight / 500);
+  liniendicke = floor(windowHeight / 250);
 
   if (liniendicke <= 0) {
     liniendicke = 0.5;
@@ -262,7 +262,7 @@ function lineAnim() {
   rect(0, height - paddingobenunten - 1, width, height);
   rect(width - paddinglinksrechts - 1, 0, width, height);
 
-  if (millis() - previousTime >= 60) {
+  if (millis() - previousTime >= 15) {
     counter++;
     previousTime = millis();
   }

@@ -270,7 +270,7 @@ function spiralAnim() {
     translate(windowWidth / 4, windowHeight / 2);
 
     // ellipse(0, 0, windowHeight);
-    line(0, 0, valueArray[counter][0], valueArray[counter][1]);
+    // line(0, 0, valueArray[counter][0], valueArray[counter][1]);
     line(
       valueArray[counter - 1][0],
       valueArray[counter - 1][1],
@@ -282,7 +282,7 @@ function spiralAnim() {
     //Basel
     push();
     translate((windowWidth / 4) * 3, windowHeight / 2);
-    line(0, 0, valueArray[counter][2], valueArray[counter][3]);
+    // line(0, 0, valueArray[counter][2], valueArray[counter][3]);
     line(
       valueArray[counter - 1][2],
       valueArray[counter - 1][3],

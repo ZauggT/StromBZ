@@ -104,7 +104,7 @@ function setup() {
   skalaTextgrösse = floor(windowHeight / 90);
   lineLength = ceil(windowHeight / 250);
   skalaFarbe = 100;
-  liniendicke = 1;
+  liniendicke = 2;
 
   if (liniendicke <= 0.1) {
     liniendicke = 0.5;
